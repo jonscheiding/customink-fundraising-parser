@@ -1,10 +1,54 @@
 <html>
-  <body>
+<head>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/960gs/0/960.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style type="text/css">
+    body {
+      font-family: 'Roboto';
+      font-size: 20px;
+    }
+    .label {
+      height: 120px;
+      text-align: center;
+      display: table;
+    }
+    .label .image {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .label .image img {
+      width: 75px;
+      height: 75px;
+    }
+    .label .text {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .label .text .name {
+      font-weight: bold;
+    }
+    .label .text .purchased {
+      font-size: 0.8em;
+    }
+    .label .text .thanks {
+      font-size: 0.8em;
+      font-style: italic;
+      padding-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container_12">
     {{#.}}
-      <div class="label">
-        <div class="name">{{name}}</div>
-        <div class="purchased">{{purchase}}</div>
+      <div class="grid_4 label">
+        <div class="image"><img src="logo.png"></div>
+        <div class="text">
+          <div class="name">{{name}}</div>
+          <div class="purchased">{{purchase}}</div>
+          <div class="thanks">Thanks for your support!</div>
+        </div>
       </div>
     {{/.}}
-  </body>
+  </div>
+</body>
 </html>
