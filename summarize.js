@@ -6,10 +6,9 @@ const orders = require(file);
 const summary = {};
 
 for(let order of orders) {
-  let purchases = order.purchase.split(',').map(i => i.trim());
-  for(let purchase of purchases) {
-    const [ count, size ] = purchase.split(' - ');
-    summary[size] = (summary[size] || 0) + Number(count);
+  for(let purchase of order.purchases) {
+    const { size, count } = purchase;
+    summary[size] = (summary[size] || 0) + count;
   }
 }
 

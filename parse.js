@@ -24,12 +24,27 @@ parser.on('readable', () => {
     if(props['Shipping Type'] != 'Bulk ship') {
       continue;
     }
+
+    const match = props['Product Summary']
+      .match(/(.*) - (.*) - (.*)\: (?:(\d+) - (.+?), )*(\d+) - (.+)/);
+
+    if(!match) {
+      console.error(`Couldn't understand product summary: "${props['Product Summary']}".`);
+    }
+
+    const [ fullMatch, productName, gender, color ] = match.splice(0, 4);
+    const purchases = [];
+    while (match.length > 0) {
+      const [ count, size ] = match.splice(0, 2);
+      if (!count) { continue; }
+
+      purchases.push ( { count: Number(count), size } );
+    }
   
     orders.push({
-      name: props['Nickname'] || props['Name'],
-      purchase: props['Product Summary']
-        .replace('Gildan Ultra Cotton T-shirt - Unisex - Black: ', '')
-        .replace(/Adult /g, '')
+      name: (props['Nickname'] || props['Name']).trimEnd(),
+      donation: props['Donation'],
+      purchases
     });
   }
 });
