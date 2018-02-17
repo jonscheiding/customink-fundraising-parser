@@ -35,10 +35,16 @@
       font-style: italic;
       padding-top: 5px;
     }
+    .cards {
+      page-break-after: always;
+    }
+    .checklist { 
+      font-size: 1.2em;
+    }
   </style>
 </head>
 <body>
-  <div class="container_12">
+  <div class="container_12 cards">
     {{#.}}
       <div class="grid_4 label">
         <div class="image"><img src="logo.png"></div>
@@ -52,6 +58,11 @@
           <div class="thanks">Thank you for your support!</div>
         </div>
       </div>
+    {{/.}}
+  </div>
+  <div class="container_12 checklist">
+    {{#.}}
+      <div class="grid_6">❏ {{name}}</div>
     {{/.}}
   </div>
 </body>
