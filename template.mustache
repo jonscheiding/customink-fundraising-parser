@@ -35,15 +35,31 @@
       font-style: italic;
       padding-top: 5px;
     }
-    .cards {
+    .pagebreak {
       page-break-after: always;
     }
     .checklist { 
       font-size: 1.2em;
     }
+
+    .grid_8 > .grid_4 { margin: 0 }
   </style>
 </head>
 <body>
+  <div class="container_12 checklist pagebreak">
+    <div class="grid_4">
+      <h2>Receipt Checklist</h2>
+      {{#summary}}
+        <div>❏ {{size}} ({{count}})</div>
+      {{/summary}}
+    </div>
+    <div class="grid_8">
+      <h2>Delivery Checklist</h2>
+      {{#orders}}
+        <div class="grid_4">❏ {{name}}</div>
+      {{/orders}}
+    </div>
+  </div>
   <div class="container_12 cards">
     {{#orders}}
       <div class="grid_4 label">
@@ -58,11 +74,6 @@
           <div class="thanks">Thank you for your support!</div>
         </div>
       </div>
-    {{/orders}}
-  </div>
-  <div class="container_12 checklist">
-    {{#orders}}
-      <div class="grid_6">❏ {{name}}</div>
     {{/orders}}
   </div>
 </body>
