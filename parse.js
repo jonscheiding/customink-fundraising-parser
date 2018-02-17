@@ -56,8 +56,21 @@ parser.on('readable', () => {
 
 parser.on('finish', () => {
   orders.sort((a, b) => a.lastName.localeCompare(b.lastName));
-  console.log(JSON.stringify(orders, null, '  '));
-})
+
+  const summary = {};
+
+  for(let order of orders) {
+    for(let purchase of order.purchases) {
+      const { size, count } = purchase;
+      summary[size] = (summary[size] || 0) + count;
+    }
+  }
+
+  console.log(JSON.stringify({ 
+    orders, 
+    summary: Object.keys(summary).map(key => ({size: key, count: summary[key]})) 
+  }, null, '  '));
+});
 
 parser.write(readFileSync(file));
 parser.end();

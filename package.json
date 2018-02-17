@@ -6,9 +6,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "parse": "babel-node parse.js data.csv > data.json",
-    "generate": "npm run parse && mustache data.json template.mustache > data.html",
-    "summarize": "npm run parse && babel-node summarize.js data.json"
+    "parse": "babel-node parse.js data/input.csv > data/orders.json",
+    "generate": "npm run parse && mustache data/orders.json template.mustache > data/output.html"
   },
   "author": "",
   "license": "ISC",
