@@ -7,6 +7,12 @@ let header = null;
 const orders = [];
 const file = path.resolve('.', process.argv[2]);
 
+if (!Array.prototype.last) {
+  Array.prototype.last = function(){
+      return this[this.length - 1];
+  };
+};
+
 var parser = parse();
 parser.on('readable', () => {
   let record;
@@ -40,16 +46,16 @@ parser.on('readable', () => {
 
       purchases.push ( { count: Number(count), size } );
     }
+
+    const name = (props['Nickname'] || props['Name']).trimEnd();
+    const lastName = name.split(' ').last();
   
-    orders.push({
-      name: (props['Nickname'] || props['Name']).trimEnd(),
-      donation: props['Donation'],
-      purchases
-    });
+    orders.push({ name, lastName, purchases });
   }
 });
 
 parser.on('finish', () => {
+  orders.sort((a, b) => a.lastName.localeCompare(b.lastName));
   console.log(JSON.stringify(orders, null, '  '));
 })
 
