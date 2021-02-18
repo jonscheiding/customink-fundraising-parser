@@ -1,7 +1,6 @@
 import { parse } from 'csv';
 import { readFileSync } from 'fs';
 import path from 'path';
-import transform from 'stream-transform';
 
 let header = null;
 const orders = [];
